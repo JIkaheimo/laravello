@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-2 py-1 text-white bg-blue-500 rounded-sm text-sm opacity-90 cursor-pointer;
+  }
+  .btn:hover {
+    @apply opacity-100;
+  }
+  .btn:disabled {
+    @apply opacity-30;
+  }
+
+  .btn-transparent {
+    @apply bg-transparent text-gray-600 hover:bg-gray-200 hover:text-gray-800;
+  }
+}
