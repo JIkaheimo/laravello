@@ -35,7 +35,7 @@
 
 <script>
 export default {
-  emits: ["close", "addCard"],
+  emits: ["close", "add"],
 
   data() {
     return {
@@ -51,7 +51,7 @@ export default {
 
   methods: {
     addCard() {
-      this.$emit("addCard", { title: this.title });
+      this.$emit("add", { title: this.title });
       this.close();
     },
 

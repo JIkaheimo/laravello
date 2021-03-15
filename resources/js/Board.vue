@@ -16,7 +16,12 @@
         <span v-else>{{ board.title }}</span>
       </div>
       <div v-if="board" class="flex flex-1 items-start overflow-x-auto mx-2">
-        <CardList v-for="list in board.lists" :key="list.id" v-bind="list" />
+        <CardList
+          v-for="list in board.lists"
+          :key="list.id"
+          v-bind="list"
+          @add-card="updateQueryCache($event)"
+        />
       </div>
     </div>
   </div>
@@ -26,12 +31,30 @@
 import { useQuery, useResult } from "@vue/apollo-composable";
 
 import CardList from "./components/CardList";
-import { GetBoard } from "./graphql";
+import { copify, GetBoard } from "./graphql";
 
 export default {
   components: {
     CardList,
   },
+
+  methods: {
+    updateQueryCache({ store, listId, data: eventData }) {
+      // Fetch cached query data.
+      const data = copify(
+        store.readQuery({
+          query: GetBoard,
+          variables: { id: +this.board.id },
+        })
+      );
+
+      data.board.lists.find(({ id }) => id == listId).cards.push(eventData);
+
+      // Update cached query data.
+      store.writeQuery({ query: GetBoard, data });
+    },
+  },
+
   setup() {
     const { result, loading } = useQuery(GetBoard, { id: 1 });
     const board = useResult(result);

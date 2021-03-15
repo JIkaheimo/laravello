@@ -13,8 +13,15 @@ mix.extend("graphql", {
       test: /\.(graphql|gql)$/,
       exclude: /node_moules/,
       loader: "graphql-tag/loader",
-    };
+    }
   },
 });
+
+mix.override(config => {
+  config.module.rules.push({
+    test: /\.vue$/,
+    use: [{ loader: 'vue-svg-inline-loader' }]
+  })
+})
 
 mix.graphql();

@@ -13,6 +13,7 @@ type Query {
 
 type Mutation {
   cardAdd(input: CardAddInput! @spread): Card! @create
+  cardRemove(id: ID!): Card @delete
 }
 
 type User {
@@ -41,6 +42,7 @@ type CardList {
   updated_at: DateTime!
   title: String!
   cards: [Card!]! @hasMany
+  board_id: ID!
   board: [Board!] @belongsTo
 }
 

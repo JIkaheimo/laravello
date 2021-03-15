@@ -3,24 +3,25 @@
     <div class="flex justify-between">
       <div class="text-gray-800 pl-2 pb-2 font-bold">{{ title }}</div>
     </div>
-    <Card v-for="card in cards" :key="card.id" v-bind="card" />
+    <Card
+      v-for="card in cards"
+      :key="card.id"
+      v-bind="card"
+      @remove="removeCard"
+    />
     <scale-loader
       v-if="isCardBeingAdded"
       :loading="true"
       color="rgba(139, 92, 246)"
     />
-    <CardEditor
-      @addCard="addCard"
-      @close="isEditing = false"
-      v-if="isEditing"
-    />
+    <CardEditor @add="addCard" @close="isEditing = false" v-if="isEditing" />
     <CardAddButton @click="isEditing = true" v-else />
   </div>
 </template>
 
 <script>
 import { useMutation } from "@vue/apollo-composable";
-import { AddCard, addCard } from "../graphql";
+import { AddCard, RemoveCard } from "../graphql";
 
 import Card from "./Card";
 import CardAddButton from "./CardAddButton";
@@ -55,16 +56,45 @@ export default {
     },
   },
 
+  emits: ["add-card", "remove-card"],
+
   methods: {
     addCard({ title }) {
-      addCard(this.cardAdder, title, this.id, {
-        order: this.cards.length + 1,
-        callback: () => {
-          this.$toast.success("Successfully added a new card!", {
-            position: "top-right",
-          });
-        },
+      const { id: listId, newOrder: order } = this;
+
+      this.cardAdder(
+        { title, listId, order },
+        {
+          update: (store, { data: { cardAdd } }) => {
+            this.$emit("add-card", { store, data: cardAdd, listId });
+            this.showSuccess("Successfully added a new card!");
+          },
+        }
+      );
+    },
+
+    removeCard({ id }) {
+      this.cardRemover(
+        { id },
+        {
+          update: (store, { data: { cardRemove } }) => {
+            this.$emit("remove-card", { store, data: cardRemove });
+            this.showSuccess("Successfully removed a card!");
+          },
+        }
+      );
+    },
+
+    showSuccess(message) {
+      this.$toast.success(message, {
+        position: "top-right",
       });
+    },
+  },
+
+  computed: {
+    newOrder: function () {
+      return this.cards.length + 1;
     },
   },
 
@@ -72,7 +102,16 @@ export default {
     const { mutate: cardAdder, loading: isCardBeingAdded } = useMutation(
       AddCard
     );
-    return { cardAdder, isCardBeingAdded };
+    const { mutate: cardRemover, loading: isCardBeinRemoved } = useMutation(
+      RemoveCard
+    );
+
+    return {
+      cardAdder,
+      isCardBeingAdded,
+      cardRemover,
+      isCardBeinRemoved,
+    };
   },
 };
 </script>

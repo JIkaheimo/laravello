@@ -16,7 +16,8 @@
     "graphql": "^15.5.0",
     "react": "^17.0.1",
     "tailwindcss": "^2.0.3",
-    "vue-spinner": "^1.0.4"
+    "vue-spinner": "^1.0.4",
+    "vue-svg-inline-loader": "^2.1.2"
   },
   "devDependencies": {
     "@vue/compiler-sfc": "^3.0.7",
