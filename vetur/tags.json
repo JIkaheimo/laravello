@@ -1,0 +1,32 @@
+{
+  "board": {
+    "attributes": [],
+    "description": ""
+  },
+  "card": {
+    "attributes": [
+      "id",
+      "title"
+    ],
+    "description": ""
+  },
+  "card-add-button": {
+    "attributes": [],
+    "description": ""
+  },
+  "card-editor": {
+    "attributes": [
+      "buttonText",
+      "initialText"
+    ],
+    "description": ""
+  },
+  "card-list": {
+    "attributes": [
+      "id",
+      "title",
+      "cards"
+    ],
+    "description": ""
+  }
+}

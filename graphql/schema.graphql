@@ -14,6 +14,7 @@ type Query {
 type Mutation {
   cardAdd(input: CardAddInput! @spread): Card! @create
   cardRemove(id: ID!): Card @delete
+  cardUpdate(id: ID!, title: String): Card @update
 }
 
 type User {

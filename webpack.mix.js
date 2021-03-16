@@ -1,27 +1,31 @@
 const mix = require("laravel-mix");
 
-mix.postCss("resources/css/app.css", "public/css", [require("tailwindcss")]);
-
-mix.js("resources/js/app.js", "public/js").vue();
-
-mix.extend("graphql", {
-  dependencies() {
-    return ["graphql", "graphql-tag"];
-  },
-  webpackRules() {
-    return {
-      test: /\.(graphql|gql)$/,
-      exclude: /node_moules/,
-      loader: "graphql-tag/loader",
-    }
-  },
-});
-
-mix.override(config => {
-  config.module.rules.push({
-    test: /\.vue$/,
-    use: [{ loader: 'vue-svg-inline-loader' }]
+mix
+  .postCss("resources/css/app.css", "public/css")
+  .js("resources/js/app.js", "public/js")
+  .vue()
+  .extend("graphql", {
+    dependencies() {
+      return ["graphql", "graphql-tag"];
+    },
+    webpackRules() {
+      return {
+        test: /\.(graphql|gql)$/,
+        exclude: /node_moules/,
+        loader: "graphql-tag/loader",
+      };
+    },
   })
-})
-
-mix.graphql();
+  .override((config) => {
+    config.module.rules.push(
+      {
+        test: /\.vue$/,
+        use: ["vue-svg-inline-loader"],
+      },
+      {
+        test: /\.postcss$/,
+        use: ["vue-style-loader", "css-loader", "postcss-loader"],
+      }
+    );
+  })
+  .graphql();

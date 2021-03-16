@@ -1,26 +1,27 @@
 import "./bootstrap";
 
 import { createApp, provide, h } from "vue";
-import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { DefaultApolloClient } from "@vue/apollo-composable";
 import Toaster from "@meforma/vue-toaster";
+
 import ScaleLoader from "vue-spinner/src/ScaleLoader.vue";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
-import Board from "./Board";
+import App from "./App.vue";
+import { IconButton } from "./components";
 
-const defaultClient = new ApolloClient({
-  uri: "http://127.0.0.1:8000/graphql",
-  cache: new InMemoryCache(),
-});
+import { apollo } from "./configs";
 
 createApp({
   setup() {
-    provide(DefaultApolloClient, defaultClient);
+    provide(DefaultApolloClient, apollo.client);
   },
   render() {
-    return h(Board);
+    return h(App);
   },
 })
   .component("scale-loader", ScaleLoader)
+  .component("pulse-loader", PulseLoader)
+  .component("icon-button", IconButton)
   .use(Toaster)
   .mount("#app");

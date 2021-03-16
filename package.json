@@ -7,7 +7,8 @@
     "prod": "npm run production",
     "production": "mix --production",
     "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000"
+    "watch-poll": "mix watch -- --watch-options-poll=1000",
+    "vue-int": "vue-int --input ./resources/js --output vetur --recursive"
   },
   "dependencies": {
     "@apollo/client": "^3.3.11",
@@ -33,11 +34,14 @@
     "lodash": "^4.17.19",
     "popper.js": "^1.12",
     "postcss": "^8.1.14",
+    "postcss-cssnext": "^3.1.0",
+    "postcss-import": "^14.0.0",
     "postcss-loader": "^5.1.0",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.20.1",
     "sass-loader": "^8.0.0",
     "vue": "^3.0.7",
-    "vue-loader": "^16.1.2"
+    "vue-loader": "^16.1.2",
+    "vue-style-loader": "^4.1.3"
   }
 }

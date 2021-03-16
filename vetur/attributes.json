@@ -1,0 +1,23 @@
+{
+  "card/id": {
+    "type": "string"
+  },
+  "card/title": {
+    "type": "string"
+  },
+  "card-editor/buttonText": {
+    "type": "string"
+  },
+  "card-editor/initialText": {
+    "type": "string"
+  },
+  "card-list/id": {
+    "type": "string"
+  },
+  "card-list/title": {
+    "type": "string"
+  },
+  "card-list/cards": {
+    "type": "array"
+  }
+}

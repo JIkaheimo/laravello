@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap');
+
 @layer components {
   .btn {
     @apply px-2 py-1 text-white bg-blue-500 rounded-sm text-sm opacity-90 cursor-pointer;
@@ -15,5 +17,13 @@
 
   .btn-transparent {
     @apply bg-transparent text-gray-600 hover:bg-gray-200 hover:text-gray-800;
+  }
+
+  .textarea {
+    @apply rounded-md shadow-card py-1 px-2 outline-none w-full text-gray-900 text-sm bg-white h-16 resize-none
+  }
+
+  .icon {
+    @apply w-5 h-5;
   }
 }

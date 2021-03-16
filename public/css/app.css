@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap);
 /*! tailwindcss v2.0.3 | MIT License | https://tailwindcss.com */
 
 /*! modern-normalize v1.0.0 | MIT License | https://github.com/sindresorhus/modern-normalize */
@@ -626,6 +627,32 @@ video {
 .btn-transparent:hover {
   --tw-text-opacity: 1;
   color: rgba(31, 41, 55, var(--tw-text-opacity));
+}
+
+.textarea {
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  border-radius: 0.375rem;
+  height: 4rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  resize: none;
+  --tw-shadow: 0 1px 0 rgba(9, 30, 66, 0.25);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  --tw-text-opacity: 1;
+  color: rgba(17, 24, 39, var(--tw-text-opacity));
+  width: 100%
+}
+
+.icon {
+  height: 1.25rem;
+  width: 1.25rem;
 }
 
 .space-y-0 > :not([hidden]) ~ :not([hidden]) {
